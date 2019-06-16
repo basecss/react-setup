@@ -2,10 +2,11 @@
 import React from 'react'
 /* eslint-enable no-unused-vars */
 import { render, shallow, mount } from 'enzyme'
+import renderer from 'react-test-renderer'
 
 import Select from '../../src/components/Select'
 
-describe('Select test suirte', () => {
+describe('Select test suite', () => {
   it('render all the options', () => {
     const options = ['A', 'B', 'C', 'D']
     const selectWrapper = render(<Select items={options} />)
@@ -33,6 +34,15 @@ describe('Select test suirte', () => {
     const selectWrapper = mount(<Select items={options} />)
 
     expect(selectWrapper.find('.select-item').get(0).props.children).toEqual('React')
+  })
+
+  it('render snapshot', () => {
+    const options = ['React', 'Redux']
+    const renderTree = renderer
+      .create(<Select items={options} />)
+      .toJSON()
+
+      expect(renderTree).toMatchSnapshot()
   })
 
 })
