@@ -20,4 +20,6 @@ React + Webpack + Babel + Jest + Enzyme setup. A simple react boilerplate.
 ## Tasks
 
 - `npm run start`
+- `npm run build`
+- `npm run serve`
 - `npm run test`

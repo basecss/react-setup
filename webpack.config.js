@@ -2,16 +2,19 @@ const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/dist',
+    path: path.resolve(__dirname, 'public/dist'),
+    publicPath: '/dist/',
     libraryTarget: 'umd',
     filename: 'app.js'
   },
-  devtool: 'cheap-module-source-map',
+  devtool: 'source-map',
   module: {
     rules: [{
       test: /\.less$/,
@@ -53,17 +56,22 @@ module.exports = {
       filename: 'app.css',
     }),
     new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html'
+      title: 'React Setup',
+      filename: '../index.html',
+      template: './index.html',
+      alwaysWriteToDisk: true,
+      inject: true,
+      hash: true
     }),
+    new HtmlWebpackHarddiskPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
-    contentBase: './',
+    contentBase: './public',
     hot: true,
-    port: 2333
+    port: 8088,
+    inline: true
   },
-  /*
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
@@ -79,5 +87,4 @@ module.exports = {
       })
     ],
   }
-  */
 }
