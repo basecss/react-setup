@@ -36,3 +36,8 @@ ReactDOM.render(
   </div>,
   container
 )
+
+// Hot Module Replacement
+if (module.hot) {
+  module.hot.accept()
+}
