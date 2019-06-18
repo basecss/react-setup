@@ -19,6 +19,7 @@
     "start": "webpack-dev-server --config config/webpack-dev.config.js --debug --progress --display-error-details",
     "build": "rimraf ./build && webpack --config config/webpack-build.config.js --progress",
     "serve": "http-server ./build -p 8083",
+    "lint": "./node_modules/.bin/eslint src/**/*.js",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },

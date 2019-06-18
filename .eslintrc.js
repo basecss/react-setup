@@ -20,6 +20,12 @@ module.exports = {
   extends: [
     'plugin:react/recommended'
   ],
+  settings: {
+    react: {
+      pragma: 'React',
+      version: 'detect'
+    }
+  },
   rules: {
     'array-bracket-newline': ['warn', 'consistent'],
     'array-bracket-spacing': ['error', 'never'],
