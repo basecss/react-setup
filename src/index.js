@@ -10,6 +10,7 @@ function App () {
 }
 
 const container = document.querySelector('#container')
+
 ReactDOM.render(
   <App />,
   container
