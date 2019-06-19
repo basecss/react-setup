@@ -7,6 +7,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
+const WebpackMonitor = require('webpack-monitor')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+
 module.exports = {
   bail: true,
   entry: [
@@ -69,7 +72,18 @@ module.exports = {
         from: path.resolve(process.cwd(), 'public/static'),
         to: 'static'
       }
-    ])
+    ]),
+    // http://localhost:3031
+    new WebpackMonitor({
+      capture: true, // -> default 'true'
+      launch: false, // -> default 'false'
+      port: 3031, // default -> 8081
+    }),
+    // http://localhost:3032
+    new BundleAnalyzerPlugin({
+      analyzerPort: 3032,
+      openAnalyzer: false,
+    })
   ],
   optimization: {
     minimizer: [

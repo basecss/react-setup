@@ -3,6 +3,9 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+const WebpackMonitor = require('webpack-monitor')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+
 const devServerConfig = require('./devserver.config')
 
 module.exports = {
@@ -22,15 +25,16 @@ module.exports = {
       test: /\.css$/,
       include: /node_modules/,
       use: [
+        { loader: 'css-hot-loader' },
         MiniCssExtractPlugin.loader,
-        'css-loader'
+        { loader: 'css-loader' }
       ]
     }, {
       test: /\.less$/,
       exclude: /node_modules/,
       include: path.resolve(process.cwd(), 'src'),
       use: [
-        // 'css-hot-loader',
+        { loader: 'css-hot-loader' },
         MiniCssExtractPlugin.loader,
         { loader: 'css-loader', options: { sourceMap: true } },
         { loader: 'less-loader', options: { sourceMap: true } }
@@ -55,6 +59,17 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
       hash: true
+    }),
+    // http://localhost:3031
+    new WebpackMonitor({
+      capture: true, // -> default 'true'
+      launch: false, // -> default 'false'
+      port: 3031, // default -> 8081
+    }),
+    // http://localhost:3032
+    new BundleAnalyzerPlugin({
+      analyzerPort: 3032,
+      openAnalyzer: false,
     }),
     new webpack.HotModuleReplacementPlugin()
   ],
