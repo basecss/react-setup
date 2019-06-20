@@ -19,8 +19,8 @@
     ]
   },
   "scripts": {
-    "start": "webpack-dev-server --config config/webpack-dev.config.js --debug --progress --display-error-details",
-    "build": "rimraf ./build && webpack --config config/webpack-build.config.js --progress",
+    "start": "webpack-dev-server --config config/webpack-dev.config.js --debug --display-error-details --profile",
+    "build": "rimraf ./build && webpack --config config/webpack-build.config.js --progress --display-error-details --profile",
     "serve": "http-server ./build -p 8083",
     "lint": "./node_modules/.bin/eslint src/**/*.js",
     "test": "jest",

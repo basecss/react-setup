@@ -262,7 +262,7 @@ module.exports = {
     'strict': 'off',
     'switch-colon-spacing': ['error', {before: false, after: true}],
     'symbol-description': 'warn',
-    'template-curly-spacing': ['error', 'never'],
+    'template-curly-spacing': 'off',
     'template-tag-spacing': ['error', 'never'],
     'unicode-bom': 'warn',
     'use-isnan': 'error',
